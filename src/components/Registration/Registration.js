@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import login from '../../images/login.jpg';
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import app from '../../Authentication/firebase.confog';
-
+import './Registration.css';
 
 const auth = getAuth(app);
 const Registration = () => {
@@ -23,6 +23,9 @@ const Registration = () => {
         const word = form.word.value;
         const email = form.email.value;
         const password = form.password.value;
+        const nid1 = form.nid1.value;
+        const nid2 = form.nid2.value;
+        const term = form.term.checked;
 
         let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!regEmail.test(email)) {
@@ -36,7 +39,7 @@ const Registration = () => {
             }
             else {
 
-                if (city.toLowerCase() === "gazipur") {
+                if (city.toLowerCase() === "gazipur" && term) {
 
                     setMessage("Loading.....");
 
@@ -47,7 +50,7 @@ const Registration = () => {
                             const id = userCredential.user.uid;
                             form.reset();
                             setMessage("user create successfully and check your email address for verification.")
-                            const newUser = { id, name, city, address, word, email, password, number };
+                            const newUser = { id, name, city, address, word, email, password, number, nid1, nid2 };
                             verifyEmail();
 
                             //new user information will go newUser api for saved in database
@@ -71,7 +74,7 @@ const Registration = () => {
                         });
                 }
                 else {
-                    alert("Invalid city...Only Gazipur...")
+                    alert("Invalid city...Only Gazipur... or check term")
                 }
             }
         }
@@ -117,9 +120,27 @@ const Registration = () => {
                                 <br />
                                 <input type="password" name="password" className="form-controll" placeholder='Password' required />
                                 <br />
+                                <p>Enter NID Card Picture</p>
+                                <input type="file" name="nid1" accept="image/png, image/jpeg" className='form-controll' required />
+                                <br />
+                                <input type="file" name="nid2" accept="image/png, image/jpeg" className='form-controll' required />
+                                <br />
+
+                                <div className='text-center container' style={{
+                                    display: "flex",
+                                    // justifyContent: "space-between"
+                                    alignItems:"flex-start",
+                                    marginLeft:"120px"
+                                }}>
+                                    <input type="checkbox" style={{ width: "20px" }} className='form-controll ' id="term" name="term" />
+                                    <q style={{ display: "inline-block",marginTop:"10px" }}> <Link to='/policy'>Terms and condition</Link></q>
+
+                                </div>
+
+                                <br />
                                 <small style={{ color: "red" }}>Minimum eight characters, at least one letter and one number</small>
                                 <br />
-                                <input type="submit" value="Submit" className='btn btn-danger' />
+                                <input type="submit" value="Submit" className='add-to-cart-button' />
                                 <br />
                                 <h5>{message}</h5>
 
@@ -127,9 +148,9 @@ const Registration = () => {
                             <span> Have you account ? <Link to="/login">Login</Link></span>
                         </div>
                     </div>
-                </div>
-            </section>
-        </div>
+                </div >
+            </section >
+        </div >
     );
 };
 

@@ -12,6 +12,8 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PrivateRouteLogin from './components/PrivateRouteLogin/PrivateRouteLogin';
 import Prof from './components/Prof/Prof';
+import About from './components/About/About';
+import Privacy from './components/Privacy/Privacy';
 
 function App() {
 
@@ -49,6 +51,13 @@ function App() {
 
 
         <Route path="/productInformation/:productId" element={<Information></Information>}>
+
+        </Route>
+        <Route path='/about' element={<About></About>}>
+          
+        </Route>
+
+        <Route path='/policy' element={<Privacy></Privacy>}>
 
         </Route>
         <Route path='*' element={<NotFound></NotFound>}>

@@ -7,7 +7,7 @@ import home from '../../images/home (2).png';
 
 const Carusel = () => {
     return (
-        <div className='container my-5 bg-light carousel'>
+        <div className='container my-5 bg-warning carousel'>
             <Carousel>
                 <Carousel.Item >
                     <img

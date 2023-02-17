@@ -19,9 +19,9 @@ const Product = ({ product }) => {
     }
 
     return (
-        <div className='product-container my-5  p-5 col-md-4 col-sm-12'>
+        <div className=' my-5  p-5 col-md-4 col-sm-12'>
 
-            <div className='image-div'>
+            {/* <div className='image-div'>
                 <img src={img} alt="" height='100' width='100' className='mx-auto' />
             </div>
 
@@ -31,6 +31,18 @@ const Product = ({ product }) => {
                 <p><small>Price:{price}</small></p>
                 <p>Seller:{seller}</p>
                 <button className='btn btn-danger' onClick={() => productInfo(product)}>Click for Information</button>
+            </div> */}
+            <div class="product-card">
+                <div className='image-div'>
+                    <img src={img} alt="" height='100' width='100' className='mx-auto' />
+                </div>
+
+                <div class="product-details information-div">
+                    <h2>{name}</h2>
+                    <p class="product-description"><small>Rent Price:{rentPrice}</small></p>
+                    <p class="product-price"><small>Price:{price}</small></p>
+                    <button className=' add-to-cart-button' onClick={() => productInfo(product)}>Click for Information</button>
+                </div>
             </div>
         </div>
     );

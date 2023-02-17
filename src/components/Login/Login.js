@@ -26,22 +26,18 @@ const Login = () => {
 
         const email = form.email.value;
         const password = form.password.value;
-        const cpassword = form.cpassword.value;
-
+       
         let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!regEmail.test(email)) {
             alert("Invalid email....");
         }
         else {
             let regPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-            if (!regPass.test(password) || !regPass.test(cpassword)) {
+            if (!regPass.test(password)) {
                 alert("Invalid password");
             } else {
 
-                if (cpassword !== password) {
-                    alert("password and confirm password not match")
-                }
-                else {
+               
                     setMessage("please wait....")
                     signInWithEmailAndPassword(auth, email, password)
                         .then((userCredential) => {
@@ -80,7 +76,7 @@ const Login = () => {
                             setMessage(errorMessage)
 
                         });
-                }
+                
             }
         }
 
@@ -100,9 +96,7 @@ const Login = () => {
                                 <br />
                                 <input type="password" name="password" className="form-controll" placeholder='Password' required />
                                 <br />
-                                <input type="password" name="cpassword" className="form-controll" placeholder='confirm password' required />
-                                <br />
-                                <input type="submit" value="Submit" className='btn btn-danger' />
+                                <input type="submit" value="Submit" className='add-to-cart-button' />
                                 <br />
                                 <h4>{message}</h4>
                             </form>

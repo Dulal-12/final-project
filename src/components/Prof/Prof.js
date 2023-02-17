@@ -4,7 +4,7 @@ import GetProducts from '../../CustomHook/getProducts';
 import GetUser from '../../CustomHook/getUser';
 import { deleteProductLocal, deleteUser, findObj, findUser } from '../../CustomHook/utilities';
 import './Prof.css';
-import registration from '../../images/registration.jpg'
+import pic from '../../images/person.jpg';
 
 const Prof = () => {
 
@@ -35,11 +35,12 @@ const Prof = () => {
         const rentPrice = form.rentPrice.value;
         const price = form.price.value;
         const img = form.image.value;
+        const description = form.description.value;
         const category = option;
         const seller = personInfo.name;
         const sellerinfo = seller;
 
-        const data = { name, rentPrice, price, img, category, seller, sellerinfo };
+        const data = { name,description, rentPrice, price, img, category, seller, sellerinfo };
         form.reset();
 
         fetch('http://localhost:4000/userproduct', {
@@ -134,81 +135,67 @@ const Prof = () => {
 
     return (
         <div className='container mt-5'>
-            <div className="page-content page-container text-center" id="page-content" >
-                <div className="padding">
-                    <div className="row container d-flex justify-content-center">
-                        <div className="col-xl-6 col-md-12">
-                            <div className="card user-card-full">
-                                <div className="row m-l-0 m-r-0">
-                                    <div className="col-sm-4 bg-c-lite-green user-profile">
-                                        <div className="card-block text-center text-white">
-                                            <div className="m-b-25">
-                                                <img src="https://img.icons8.com/bubbles/100/000000/user.png" className="img-radius" alt="User-Profile-Image" />
-                                            </div>
-                                            <h6 className="f-w-600">{personInfo.name}</h6>
-                                            <p>Word No.{personInfo.word}</p>
-                                            <i className=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-8">
-                                        <div className="card-block">
-                                            <h6 className="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
-                                            <div className="row">
-                                                <div className="col-sm-6">
-                                                    <p className="m-b-10 f-w-600">Email</p>
-                                                    <h6 className="text-muted f-w-400">{personInfo.email}</h6>
-                                                </div>
-                                                <div className="col-sm-6">
-                                                    <p className="m-b-10 f-w-600">City</p>
-                                                    <h6 className="text-muted f-w-400">{personInfo.city}</h6>
-                                                    <button onClick={() => logout()} className='btn btn-success'>Logout</button>
-                                                </div>
-                                            </div>
 
-                                            <div className='row'>
-                                                <div className='col-md-12'>
-
-                                                    <h4 style={{ color: "red", marginTop: "20px" }}>Post Your Product</h4>
-                                                    <form className='login' onSubmit={productInfo}>
-                                                        <input type="text" name="name" className="form-controll" placeholder='Product name' required />
-                                                        <br />
-                                                        <input type="number" name="rentPrice" className="form-controll" placeholder='Rent Price' required />
-                                                        <br />
-                                                        <input type="number" name="price" className="form-controll" placeholder='price' required />
-                                                        <br />
-                                                        <input type="text" name="image" className="form-controll" placeholder='image-url' required />
-                                                        <br />
-                                                        <label for="cars">Choose a Category  :  </label>
-
-                                                        <select id="cars" className='form-controll' onChange={handleChange}>
-                                                            <option value="mobile">mobile</option>
-                                                            <option value="laptop">laptop</option>
-                                                            <option value="home appliance">home appliance</option>
-                                                            <option value="doll">doll</option>
-                                                        </select>
-                                                        <br />
-                                                        <br />
-                                                        <input type="submit" value="Submit" className='btn btn-danger' />
-                                                    </form>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {
-                    selectProduct.length > 0 ? <div><h3>Total price: {total}</h3><button className='btn btn-danger' onClick={confirmOrder}>Confirm</button></div> : <p></p>
-                }
+            <div>
+                <header>
+                    <h1>My Profile</h1>
+                </header>
+                <main>
+                    <section class="profile">
+                        <img src={pic} alt="/"/>
+                            <h2>{personInfo.name}</h2>
+                           
+                            <ul>
+                                <li>Email: {personInfo.email}</li>
+                                <li>Location: {personInfo.city}</li>
+                            </ul>
+                            <button onClick={() => logout()} className='btn btn-success'>Logout</button>
+                    </section>
+                </main>
             </div>
 
 
+            <div className='row text-center' style={{border:"none" , boxShadow:"5px 5px 10px grey", borderRadius:"10px"}}>
+                <div className='col-md-12'>
+                
 
+                    <h4 style={{ color: "red", marginTop: "20px" }}>Post Your Product</h4>
+                    <form className='login' onSubmit={productInfo}>
+                        <input type="text" name="name" className="form-controll" placeholder='Product name' required />
+                        <br />
+                        <input type="text" name="description" className="form-controll" placeholder='Enter product description' required />
+                        <br/>
+                        <input type="number" name="rentPrice" className="form-controll" placeholder='Rent Price' required />
+                        <br />
+                        <input type="number" name="price" className="form-controll" placeholder='price' required />
+                        <br />
+                        <input type="file" name="image" className="form-controll" placeholder='image-url' required />
+                        <br />
+                        <label for="cars">Choose a Category  :  </label>
+
+                        <select id="cars" className='form-controll' onChange={handleChange}>
+                            <option value="mobile">mobile</option>
+                            <option value="laptop">laptop</option>
+                            <option value="home appliance">home appliance</option>
+                            <option value="doll">doll</option>
+                        </select>
+                        <br />
+                        <br />
+                        <input type="submit" value="Submit" className='btn btn-danger' />
+                    </form>
+                </div>
+
+            </div>
+
+
+            {
+                selectProduct.length > 0 ? <div><h3>Total price: {total}</h3><button className='btn btn-danger' onClick={confirmOrder}>Confirm</button></div> : <p></p>
+            }
         </div>
+
+
+
+
     );
 };
 

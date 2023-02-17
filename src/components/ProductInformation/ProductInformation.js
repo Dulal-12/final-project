@@ -7,7 +7,7 @@ import './ProductInformation.css';
 
 const ProductInformation = ({ product }) => {
 
-    const { id, name, rentPrice, price, img, stock, rating } = product;
+    const { id, name, rentPrice, price, img, rating } = product;
 
     const [add, setAdd] = useState(false);
     const [valid, setValid] = useState(false);
@@ -40,15 +40,29 @@ const ProductInformation = ({ product }) => {
 
         const value1 = event.target.first.checked;
         const value2 = event.target.second.checked;
+        const value3 = event.target.third.checked;
 
-        if (value1 && value2) {
+        if (value1 && value2 && value3) {
             alert("Please chose only one plan...");
         }
-        else if (!value1 && !value2) {
+        else if(value1 && value2){
+            alert("Please chose only one plan...");
+        }
+        else if(value1 && value3){
+            alert("Please chose only one plan...");
+        }
+        else if(value2 && value3){
+            alert("Please chose only one plan...");
+        }
+        else if (!value1 && !value2 && !value3) {
             alert("please chose plan..")
         }
         else {
             if (value1) {
+                addToLocal(id);
+                setAdd(true);
+            }
+            else if(value2){
                 addToLocal(id);
                 setAdd(true);
             }
@@ -64,42 +78,46 @@ const ProductInformation = ({ product }) => {
 
 
     return (
-        <div className='product-container my-5 p-5'>
+        <div className='mt-5 mb-2'>
+            <div className="product-card">
+                <div>
+                    <div className='image-div'>
+                        <img src={img} alt="" height='100' width='100' className='mx-auto' />
+                    </div>
 
-            <div>
-                <div className='image-div'>
-                    <img src={img} alt="" height='100' width='100' className='mx-auto' />
+                    <div className='m-3 product-details information-div'>
+                        <h2>{name}</h2>
+                        <p class="product-description"><small>Rent Price:{rentPrice}</small></p>
+                        <p class="product-price"><small>Price:{price}</small></p>
+                        <p>Rating: {rating} stars</p>
+                    </div>
                 </div>
 
-                <div className='m-3 information-div'>
-                    <h3>{name}</h3>
-                    <h5><small>Rent Price:{rentPrice}</small></h5>
-                    <p><small>Price:{price}</small></p>
-                    <p>Stock:{stock}</p>
-                    <p>Rating: {rating} stars</p>
-                </div>
+                <form onSubmit={addToProduct} className="mt-5">
+                    <h4>Choose your plan:</h4>
+
+                    <div>
+                        <input type="checkbox" id="first" name="first" />
+                        <label for="first">1</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="second" name="second" />
+                        <label for="second">2</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="third" name="third" />
+                        <label for="third">3</label>
+                    </div>
+                    {
+                        ((Object.keys(data).length === 0) && (valid === false)) ? <input type="submit" value="Add to Cart" className='add-to-cart-button' /> : <p>You already added product or you get product</p>
+                    }
+                    {/* Here work add hook */}
+                    {
+                        add && <div><p className='text text-success'>Thanks for add to cart...</p><Link to='/orders'>Go Order</Link></div>
+                    }
+                </form>
             </div>
-
-            <form onSubmit={addToProduct}>
-                <h4>Choose your plan:</h4>
-
-                <div>
-                    <input type="checkbox" id="first" name="first" />
-                    <label for="first">1</label>
-                </div>
-
-                <div>
-                    <input type="checkbox" id="second" name="second" />
-                    <label for="second">2</label>
-                </div>
-                {
-                    ((Object.keys(data).length === 0) && (valid === false)) ? <input type="submit" value="Add to Cart" className='btn btn-danger' /> : <p>You already added product or you get product</p>
-                }
-                {/* Here work add hook */}
-                {
-                    add && <div><p className='text text-success'>Thanks for add to cart...</p><button className='btn btn success'><Link to='/orders'>Go Order</Link></button></div>
-                }
-            </form>
 
         </div>
     );
