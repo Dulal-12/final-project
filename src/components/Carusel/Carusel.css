@@ -1,0 +1,11 @@
+Carousel{
+    display: flex;
+}
+h2{
+    color:green;
+    font-weight: 900;
+}
+
+.carousel{
+    border-radius: 20px;
+}

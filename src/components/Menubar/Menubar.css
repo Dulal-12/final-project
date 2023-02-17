@@ -1,0 +1,25 @@
+.navbar-container{
+    display: flex;
+    padding:0px 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.navbar-container a{
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 30px;
+    color: white;
+}
+
+.navbar-container a:hover{
+    border-bottom: 2px solid green;
+    font-weight: bold;
+    color:red;
+}
+
+.position{
+
+    position: sticky;
+    top: 0;
+}

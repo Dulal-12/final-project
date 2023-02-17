@@ -1,0 +1,25 @@
+span{
+    font-weight: 700;
+}
+.card-container:hover{
+
+    box-shadow: 5px 5px 5px lightgray;
+}
+
+.last-section img{
+
+    height:100px;
+
+}
+
+.last-section{
+
+    display: flex;
+    justify-content: center;
+}
+
+.element{
+    background-color:palegreen !important;
+    color:black;
+    font-weight: 600;
+}
