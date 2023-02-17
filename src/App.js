@@ -14,12 +14,16 @@ import PrivateRouteLogin from './components/PrivateRouteLogin/PrivateRouteLogin'
 import Prof from './components/Prof/Prof';
 import About from './components/About/About';
 import Privacy from './components/Privacy/Privacy';
+import Membership from './components/Membership/Membership';
+import { createContext, useState } from 'react';
+export const memberTaka = createContext();
 
 function App() {
 
+  const[taka , setTaka] = useState(0);
 
   return (
-    <div>
+    <memberTaka.Provider value={[taka,setTaka]}>
       <Menubar></Menubar>
 
       <Routes>
@@ -60,13 +64,17 @@ function App() {
         <Route path='/policy' element={<Privacy></Privacy>}>
 
         </Route>
+
+        <Route path='/membership' element={<Membership></Membership>}>
+
+        </Route>
         <Route path='*' element={<NotFound></NotFound>}>
 
         </Route>
 
       </Routes>
       <Footer></Footer>
-    </div>
+    </memberTaka.Provider>
   );
 }
 
